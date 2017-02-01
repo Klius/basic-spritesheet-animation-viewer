@@ -1,0 +1,93 @@
+<html>
+	<head>
+		
+	</head>
+	<body>
+		<canvas id="canvas" width="500" height="500" style="background-color:black;">
+			where is your canvas?
+		</canvas>
+		<h3>Options</h3>
+		<div>
+			<ul>
+				<li>
+					<label for="sx">Starting X:</label>
+					<input onchange="setupAnimation()" value="0" id="sx" type="number"></input>
+				</li>
+				<li>
+					<label for="sy">Starting Y:</label>
+					<input onchange="setupAnimation()" value="0" id="sy" type="number"></input>
+				</li>
+				<li>
+					<label for="swidth">Starting Width:</label>
+					<input onchange="setupAnimation()" value="100" id="swidth" type="number"></input>
+				</li>
+				<li>
+					<label for="sheight">Starting Height:</label>
+					<input onchange="setupAnimation()" value="100" id="sheight" type="number"></input>
+				</li>
+				<li>
+					<label for="width">Width:</label>
+					<input onchange="setupAnimation()" value="100" id="width" type="number"></input>
+				</li>
+				<li>
+					<label for="height">Height:</label>
+					<input onchange="setupAnimation()" value="100" id="height" type="number"></input>
+				</li>
+				<li>
+					<label for="animationspeed">Animation Speed:</label>
+					<input onchange="setupAnimation()" value="5" id="animationspeed" type="number"></input>
+				</li>
+				<li>
+					<label for="image">Spritesheet:</label>
+					<input onchange="setupAnimation()" id="image" defaultValue="imgs/default.png" type="file"></input>
+				</li>
+				<li>
+					<label for="frame">Frame:</label>
+					<input onchange="nextFrame(this)" id="frame" type="number" value="0" min="0" max="4"></input>
+				</li>
+				<li>
+					<label for="rotation">Angle rotation:</label>
+					<input onchange="setupAnimation()" id="rotation" type="number" value="0" min="0" max="360"></input>
+				</li>
+			</ul>
+			<button onclick="setupAnimation()">Test Animation</button>
+			<button onclick="game.pause = game.pause ? false : true;"> Pause/Play </button>
+		</div>
+		<script src="penguin-engine.js"></script>
+		<script type="text/javascript">
+			function setupAnimation()
+			{
+				game.pause = true;
+				game.animation.sX = Number(document.getElementById("sx").value);
+				game.animation.sY = Number(document.getElementById("sy").value);
+				game.animation.sWidth = Number(document.getElementById("swidth").value);
+				game.animation.sHeight = Number(document.getElementById("sheight").value);
+				game.animation.width = Number(document.getElementById("width").value);
+				game.animation.height = Number(document.getElementById("height").value);
+				game.animation.animationSpeed = Number(document.getElementById("animationspeed").value);
+				game.animation.angle = Number(document.getElementById("rotation").value) * (Math.PI/180);
+				var file = document.querySelector('input[type=file]').files[0];
+				var reader = new FileReader();
+				reader.onloadend = function () {
+					img.src = reader.result; 
+					game.pause = false;
+				}
+				if (file) {
+					reader.readAsDataURL(file);
+					document.getElementById("frame").max = Math.floor(img.width/game.animation.sWidth);
+				} 
+				else {
+					img.src = "imgs/default.png";
+					document.getElementById("frame").max = 4;
+					game.pause = false;
+				}
+				
+			}
+			function nextFrame(frames){
+				game.pause = true;
+				game.animation.fakesx = frames.value*Number(document.getElementById("swidth").value);
+				game.animation.draw();	
+			}
+		</script>
+	</body>
+</html>
