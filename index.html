@@ -6,8 +6,8 @@
 		<canvas id="canvas" width="500" height="500" style="background-color:black;">
 			where is your canvas?
 		</canvas>
-		<h3>Options</h3>
 		<div>
+			<h3>Sprite Options</h3>
 			<ul>
 				<li>
 					<label for="sx">Starting X:</label>
@@ -50,8 +50,16 @@
 					<input onchange="setupAnimation()" id="rotation" type="number" value="0" min="0" max="360"></input>
 				</li>
 			</ul>
-			<button onclick="setupAnimation()">Test Animation</button>
-			<button onclick="game.pause = game.pause ? false : true;"> Pause/Play </button>
+			<button onclick="setupAnimation()">
+				Test Animation
+			</button>
+			<button onclick="game.pause = game.pause ? false : true;">
+				Pause/Play 
+			</button>
+		</div>
+		<div>
+			<h3>Canvas Options</h3>
+				
 		</div>
 		<script src="penguin-engine.js"></script>
 		<script type="text/javascript">
