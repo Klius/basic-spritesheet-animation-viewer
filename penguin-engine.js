@@ -52,6 +52,7 @@ function Drawable() {
 function Animation(){
 	
 	this.draw = this.draw = function() {
+		this.fakesx = this.sX;
 		this.context.clearRect(this.x,this.y,game.canvas.width,game.canvas.height);
 		this.context.save();
 		this.context.translate(this.x + this.width/2, this.y + this.height/2);
